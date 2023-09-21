@@ -1,0 +1,4 @@
+#toast-container .toast-message {
+  overflow-y: auto;
+  max-height: 95vh; /* Without limiting the height the scroll won't work */
+}

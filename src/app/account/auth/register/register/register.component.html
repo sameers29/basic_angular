@@ -1,0 +1,314 @@
+<main class="maincss">
+  <div class="container">
+    <section
+      class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+    >
+      <div class="container">
+        <div class="row justify-content-center">
+          <div
+            class="col-lg-6 col-md-6 d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="d-flex justify-content-center py-4">
+              <a
+                routerLink="/auth/register"
+                class="logo d-flex align-items-center w-auto"
+              >
+                <img src="assets/img/logo.png" alt="" />
+                <span class="d-none d-lg-block">NiceAdmin</span>
+              </a>
+            </div>
+            <!-- End Logo -->
+
+            <div class="card mb-3">
+              <div class="card-body">
+                <div class="pt-4 pb-2">
+                  <h5 class="card-title text-center pb-0 fs-4">
+                    Create an Account
+                  </h5>
+                  <p class="text-center small">
+                    Enter your personal details to create account
+                  </p>
+                </div>
+
+                <form
+                  class="row g-3 needs-validation"
+                  [formGroup]="registerForm"
+                  (ngSubmit)="onSubmit()"
+                >
+                  <div class="col-6">
+                    <label for="select-role" class="form-label"
+                      >Sign up as
+                      <span class="text-danger">*</span>
+                    </label>
+
+                    <select
+                      class="form-select"
+                      id="select-role"
+                      formControlName="roleId"
+                    >
+                      <option value="">Select Role</option>
+                      <option
+                        *ngFor="let data of allData"
+                        value="{{ data.id }}"
+                      >
+                        {{ data.roleNameEn }}
+                      </option>
+                    </select>
+                    <!-- <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.roleId.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.roleId.errors?.required
+                      "
+                    >
+                      Role is required
+                    </small> -->
+                  </div>
+
+                  <div class="col-6">
+                    <label for="email" class="form-label"
+                      >Email
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      formControlName="email"
+                      class="form-control"
+                      id="email"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.email.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.email.errors?.required
+                      "
+                    >
+                      Email is required
+                    </small>
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="registerFormControl.email.errors?.email"
+                      >Invalid email format.</small
+                    >
+                  </div>
+
+                  <div class="col-6">
+                    <label for="firstName" class="form-label"
+                      >First Name
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="Enter your First Name"
+                      formControlName="firstName"
+                      class="form-control"
+                      id="firstName"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.firstName.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.firstName.errors?.required
+                      "
+                    >
+                      First Name is required
+                    </small>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="lastName" class="form-label"
+                      >Last name
+                      <span class="text-danger">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Enter your Last Name"
+                      formControlName="lastName"
+                      class="form-control"
+                      id="lastName"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.lastName.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.lastName.errors?.required
+                      "
+                    >
+                      Last Name is required
+                    </small>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="mobileNumber" class="form-label"
+                      >Mobile number <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="number"
+                      name="mobileNumber"
+                      class="form-control"
+                      id="mobileNumber"
+                      placeholder="Enter your Mobile Number"
+                      formControlName="mobile"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.mobile.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.mobile.errors?.required
+                      "
+                    >
+                      Mobile number is required
+                    </small>
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="registerFormControl.mobile.errors?.pattern"
+                    >
+                      Number must be 10 digit
+                    </small>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="agent-c-name" class="form-label"
+                      >Agent's Company Name
+                      <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="text"
+                      name="agent-c-name"
+                      class="form-control"
+                      id="agent-c-name"
+                      placeholder="Enter Agent's Company Name"
+                      formControlName="agentCompanyName"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.agentCompanyName.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.agentCompanyName.errors?.required
+                      "
+                    >
+                      agent company name is required
+                    </small>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="yourPassword" class="form-label"
+                      >Password <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      id="yourPassword"
+                      placeholder="Enter your password"
+                      formControlName="password"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.password.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.password.errors?.required
+                      "
+                    >
+                      Password is required
+                    </small>
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="registerFormControl.password.errors?.minlength"
+                      >*Password must be at least 8 characters<br />
+                    </small>
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="registerFormControl.password.errors?.pattern"
+                      >*At least one letter<br />
+                      *At least one number<br />
+                      *At least one special character
+                    </small>
+                  </div>
+
+                  <div class="col-6">
+                    <label for="re-enter-password" class="form-label"
+                      >Re-enter Password
+                      <span class="text-danger">*</span></label
+                    >
+                    <input
+                      type="password"
+                      name="password"
+                      class="form-control"
+                      placeholder="Re-enter your Password"
+                      formControlName="confirmPassword"
+                      id="re-enter-password"
+                    />
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        (registerFormControl.confirmPassword.touched ||
+                          registerFormSubmitted) &&
+                        registerFormControl.confirmPassword.errors?.required
+                      "
+                    >
+                      Confirm password is required
+                    </small>
+                    <small
+                      class="text-danger error-class"
+                      *ngIf="
+                        registerFormControl.confirmPassword.errors?.mustMatch
+                      "
+                    >
+                      Confirm Passwords must match
+                    </small>
+                  </div>
+
+                  <!-- <div class="col-6">
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        name="terms"
+                        type="checkbox"
+                        value=""
+                        id="acceptTerms"
+                      />
+                      <label class="form-check-label" for="acceptTerms"
+                        >I agree and accept the
+                        <a href="#">terms and conditions</a></label
+                      >
+                      <div class="invalid-feedback">
+                        You must agree before submitting.
+                      </div>
+                    </div>
+                  </div> -->
+                  <div class="col-12">
+                    <button
+                      class="btn btn-primary w-100"
+                      type="submit"
+                      [disabled]="isLoading || !registerForm.valid"
+                    >
+                      Create Account
+                    </button>
+                  </div>
+                  <div class="col-12 text-center">
+                    <p class="small mb-0">
+                      Already have an account?
+                      <a routerLink="/auth/login">Log in</a>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+<!-- End #main -->
